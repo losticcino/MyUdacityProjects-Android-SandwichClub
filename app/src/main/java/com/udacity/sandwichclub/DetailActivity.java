@@ -96,7 +96,7 @@ public class DetailActivity extends AppCompatActivity {
             View childview = mMainDetailLayout.getChildAt(i);
             if (childview instanceof TextView){
                 TextView thischildview = (TextView) childview;
-                if (thischildview.length() < 2) {
+                if (thischildview.length() < 1) { // I chose les than 1 to cover any time where a whitespace or empty is entered instead of leaving the field empty.
                     thischildview.setText(R.string.no_known_information);
                     thischildview.setTextColor(Color.parseColor("#d8d8d8"));
                 }
