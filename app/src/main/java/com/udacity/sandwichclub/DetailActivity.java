@@ -3,12 +3,19 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import org.json.JSONException;
+import org.w3c.dom.Text;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -36,14 +43,20 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        Sandwich sandwich = JsonUtils.parseSandwichJson(json);
+        Sandwich sandwich = null;
+        try {
+            sandwich = JsonUtils.parseSandwichJson(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
             return;
         }
 
-        populateUI();
+        Log.v ("String","URL: "+sandwich.getImage());
+        populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -56,7 +69,33 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(Sandwich sandwich) {
+        TextView mAlsoKnownAsView = (TextView) findViewById(R.id.tv_AlsoKnownAs);
+        TextView mPlaceOfOriginView = (TextView) findViewById(R.id.tv_Origin);
+        TextView mDescriptionView = (TextView) findViewById(R.id.tv_Description);
+        TextView mIngreditentsView= (TextView) findViewById(R.id.tv_Ingredients);
+        RelativeLayout lMainDetailLayout = (RelativeLayout) findViewById(R.id.Main_Detail_Layout);
 
+        mPlaceOfOriginView.setText(sandwich.getPlaceOfOrigin());
+        mDescriptionView.setText(sandwich.getDescription());
+
+
+        for (String s : sandwich.getAlsoKnownAs()) {
+            if ( mAlsoKnownAsView.getText() == "" ) {mAlsoKnownAsView.setText(s);}
+            else { mAlsoKnownAsView.append( "," + s ); }
+        }
+
+        for (String s : sandwich.getIngredients()) {
+            if ( mIngreditentsView.getText() == "" ) { mIngreditentsView.setText(s); }
+            else { mIngreditentsView.append( "\n" + s ); }
+        }
+
+        for (int i=0; i < lMainDetailLayout.getChildCount(); i++) {
+            View childview = lMainDetailLayout.getChildAt(i);
+            if (childview instanceof TextView){
+                TextView thischildview = (TextView) childview;
+                if (thischildview.length() < 2) {thischildview.setText(R.string.no_known_information);}
+            }
+        }
     }
 }
