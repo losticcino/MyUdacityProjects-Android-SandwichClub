@@ -28,9 +28,10 @@ public class JsonUtils {
 
     private static ArrayList<String> JSArrayToList(JSONArray arInputArray) throws JSONException {
 
+        // This is just a quick-and-dirty function to convert a JSON array to a List.
         if (arInputArray == null) { return null;}
 
-        ArrayList<String> newList = new ArrayList<String>();
+        ArrayList<String> newList = new ArrayList<>();
 
         for (int i=0, n=arInputArray.length(); i<n; i++){
             newList.add(arInputArray.get(i).toString());

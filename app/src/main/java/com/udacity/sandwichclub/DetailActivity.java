@@ -1,6 +1,7 @@
 package com.udacity.sandwichclub;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -67,31 +68,38 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI(Sandwich sandwich) {
-        TextView mAlsoKnownAsView = (TextView) findViewById(R.id.tv_AlsoKnownAs);
-        TextView mPlaceOfOriginView = (TextView) findViewById(R.id.tv_Origin);
-        TextView mDescriptionView = (TextView) findViewById(R.id.tv_Description);
-        TextView mIngreditentsView= (TextView) findViewById(R.id.tv_Ingredients);
-        RelativeLayout lMainDetailLayout = (RelativeLayout) findViewById(R.id.Main_Detail_Layout);
+        TextView mAlsoKnownAsView = findViewById(R.id.tv_AlsoKnownAs);
+        TextView mPlaceOfOriginView = findViewById(R.id.tv_Origin);
+        TextView mDescriptionView = findViewById(R.id.tv_Description);
+        TextView mIngreditentsView= findViewById(R.id.tv_Ingredients);
+        RelativeLayout mMainDetailLayout = findViewById(R.id.Main_Detail_Layout);
 
+        // Set basic strings
         mPlaceOfOriginView.setText(sandwich.getPlaceOfOrigin());
         mDescriptionView.setText(sandwich.getDescription());
 
 
+        // Parse lists to display - "Aliases"
         for (String s : sandwich.getAlsoKnownAs()) {
             if ( mAlsoKnownAsView.getText() == "" ) {mAlsoKnownAsView.setText(s);}
-            else { mAlsoKnownAsView.append( "," + s ); }
+            else { mAlsoKnownAsView.append( "\n" + s ); }
         }
 
+        // Parse lists to display - "Ingredients"
         for (String s : sandwich.getIngredients()) {
             if ( mIngreditentsView.getText() == "" ) { mIngreditentsView.setText(s); }
             else { mIngreditentsView.append( "\n" + s ); }
         }
 
-        for (int i=0; i < lMainDetailLayout.getChildCount(); i++) {
-            View childview = lMainDetailLayout.getChildAt(i);
+        // Set a "I don't know this" string on any text fields which have no information.  Also, change its color to a medium-gray.
+        for (int i=0; i < mMainDetailLayout.getChildCount(); i++) {
+            View childview = mMainDetailLayout.getChildAt(i);
             if (childview instanceof TextView){
                 TextView thischildview = (TextView) childview;
-                if (thischildview.length() < 2) {thischildview.setText(R.string.no_known_information);}
+                if (thischildview.length() < 2) {
+                    thischildview.setText(R.string.no_known_information);
+                    thischildview.setTextColor(Color.parseColor("#d8d8d8"));
+                }
             }
         }
     }

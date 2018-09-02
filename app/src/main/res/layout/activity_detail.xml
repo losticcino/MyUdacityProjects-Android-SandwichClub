@@ -1,105 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.udacity.sandwichclub.DetailActivity">
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/Main_Detail_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/Main_Detail_Layout"
+        <ImageView
+            android:id="@+id/image_iv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/sandwich_picture_content_description"
+            android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/image_iv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/sandwich_picture_content_description"
-                android:scaleType="centerCrop" />
+        <TextView
+            android:id="@+id/tv_static_AlsoKnownAsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_below="@+id/image_iv"
+            android:width="120dp"
+            android:paddingTop="4dp"
+            android:text="@string/detail_also_known_as_label"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_static_AlsoKnownAsLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:layout_below="@+id/image_iv"
-                android:width="120dp"
-                android:paddingTop="4dp"
-                android:text="@string/detail_also_known_as_label"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_AlsoKnownAs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:layout_below="@+id/image_iv"
+            android:layout_toRightOf="@+id/tv_static_AlsoKnownAsLabel" />
 
-            <TextView
-                android:id="@+id/tv_AlsoKnownAs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:layout_below="@+id/image_iv"
-                android:layout_toRightOf="@+id/tv_static_AlsoKnownAsLabel" />
+        <TextView
+            android:id="@+id/tv_static_OriginLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_below="@+id/tv_AlsoKnownAs"
+            android:width="120dp"
+            android:paddingTop="4dp"
+            android:text="@string/detail_place_of_origin_label"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_static_OriginLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:layout_below="@+id/tv_AlsoKnownAs"
-                android:width="120dp"
-                android:paddingTop="4dp"
-                android:text="@string/detail_place_of_origin_label"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_Origin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:layout_below="@+id/tv_AlsoKnownAs"
+            android:layout_toRightOf="@+id/tv_static_OriginLabel" />
 
-            <TextView
-                android:id="@+id/tv_Origin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:layout_below="@+id/tv_AlsoKnownAs"
-                android:layout_toRightOf="@+id/tv_static_OriginLabel" />
+        <TextView
+            android:id="@+id/tv_static_DescriptionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Origin"
+            android:width="120dp"
+            android:paddingTop="4dp"
+            android:text="@string/detail_description_label"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_static_DescriptionLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_Origin"
-                android:width="120dp"
-                android:paddingTop="4dp"
-                android:text="@string/detail_description_label"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="1dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:layout_below="@+id/tv_static_DescriptionLabel" />
 
-            <TextView
-                android:id="@+id/tv_Description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="1dp"
-                android:layout_below="@+id/tv_static_DescriptionLabel" />
+        <TextView
+            android:id="@+id/tv_static_IngredientsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Description"
+            android:width="100dp"
+            android:paddingTop="4dp"
+            android:text="@string/detail_ingredients_label"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_static_IngredientsLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_Description"
-                android:width="100dp"
-                android:paddingTop="4dp"
-                android:text="@string/detail_ingredients_label"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_Ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Description"
+            android:paddingLeft="4dp"
+            android:layout_toRightOf="@id/tv_static_IngredientsLabel"
+            android:paddingTop="4sp" />
 
-            <TextView
-                android:id="@+id/tv_Ingredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_Description"
-                android:paddingLeft="4dp"
-                android:layout_toRightOf="@id/tv_static_IngredientsLabel"
-                android:paddingTop="4sp" />
+    </RelativeLayout>
 
-        </RelativeLayout>
-
-    </ScrollView>
-
-
-</FrameLayout>
+</ScrollView>
